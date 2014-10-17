@@ -19,56 +19,80 @@ namespace RetroRocketASCII
         }
     }
 
-    class Rocket
+    class VerticalRocket
     {
+        private int _FuselageSections = 2;
+        public int FuselageSections
+        {
+            get
+            {
+                return _FuselageSections;
+            }
+            set
+            {
+                if (value < 100 && value > 0)
+                {
+                    _FuselageSections = value;
+                }
+            }
+        }
+        
         void Rocket()
         {
 
         }
-        public string Divider()
-        {
-            return "+=*=*=*=*=*=*+";
-        }
-        string[] upDesigns = 
+        private string Divider = "+=*=*=*=*=*=*+";
+        private string[] upDesigns = 
         {
             @"|../\..../\..|"
             , @"|./\/\../\/\.|"
             , @"|/\/\/\/\/\/\|"
         };
-        string[] downDesigns = 
+        private string[] downDesigns = 
         {
             @"|\/\/\/\/\/\/|"
             , @"|.\/\/..\/\/.|"
             , @"|..\/....\/..|"
         };
 
+        private string[] NoseOrBooster = 
+        {
+            @"     /**\"
+            , @"    //**\\"
+            , @"   ///**\\\"
+            , @"  ////**\\\\"
+            , @" /////**\\\\\"
+        };
+
         //Create the Nose and Engine Method
 
-        public void fuselage(bool diamondShape)
+        public string fuselage(bool diamondShape)
         {
             //Divider should be called during construction of Rocket
+            string fuselage = null;
             if (diamondShape)
             {
                 foreach (string line in upDesigns)
                 {
-                    Console.WriteLine(line);
+                    fuselage += line + Environment.NewLine;
                 }
                 foreach (string line in downDesigns)
                 {
-                    Console.WriteLine(line);
+                    fuselage += line + Environment.NewLine;
                 }
             }
             else
             {
                 foreach (string line in downDesigns)
                 {
-                    Console.WriteLine(line);
+                    fuselage += line + Environment.NewLine;
                 }
                 foreach (string line in upDesigns)
                 {
-                    Console.WriteLine(line);
+                    fuselage += line + Environment.NewLine;
                 }
             }
+            return fuselage;
         }
 
         
