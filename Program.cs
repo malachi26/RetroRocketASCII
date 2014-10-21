@@ -112,9 +112,18 @@ namespace RetroRocketASCII
             return noseBooster;
         }
 
+
+        /* thoughts for munching
+         * should I make all of these return string arrays?
+         * or maybe string lists that can then be stacked?
+         * would I be able to output them from the object in a to string Method? 
+         * YES, YES and YES!
+         */
+
         public string rocket(int sections)
         {
-
+            bool wantDiamond = sections % 2 == 0 ? false : true;
+           
         }
         
 
