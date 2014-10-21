@@ -36,11 +36,13 @@ namespace RetroRocketASCII
                 }
             }
         }
-        
-        void Rocket()
-        {
 
+        public string rocketString
+        {
+            get;
+            set;
         }
+
         private string Divider = "+=*=*=*=*=*=*+";
         private string[] upDesigns = 
         {
@@ -64,8 +66,14 @@ namespace RetroRocketASCII
             , @" /////**\\\\\"
         };
 
-        //Create the Nose and Engine Method
+        void Rocket()
+        {
+             
+        }
+        
 
+        //Create the Nose and Engine Method
+        
         public string fuselage(bool diamondShape)
         {
             //Divider should be called during construction of Rocket
@@ -94,7 +102,20 @@ namespace RetroRocketASCII
             }
             return fuselage;
         }
+        public string noseBooster()
+        {
+            string noseBooster = null;
+            foreach (string line in NoseOrBooster)
+            {
+                noseBooster += line + Environment.NewLine;
+            }
+            return noseBooster;
+        }
 
+        public string rocket(int sections)
+        {
+
+        }
         
 
     }
