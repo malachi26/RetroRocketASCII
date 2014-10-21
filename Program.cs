@@ -123,7 +123,7 @@ namespace RetroRocketASCII
         public string rocket(int sections)
         {
             bool wantDiamond = sections % 2 == 0 ? false : true;
-           
+            return "not finished";  
         }
         
 
