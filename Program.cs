@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 ///Inspired by various questions on StackExchange
 ///http://codereview.stackexchange.com/q/65040/18427
 ///@rolfl's question about these rockets
@@ -16,6 +15,19 @@ namespace RetroRocketASCII
     {
         static void Main(string[] args)
         {
+            VerticalRocket rocket1 = new VerticalRocket(1);
+            VerticalRocket rocket2 = new VerticalRocket();
+            VerticalRocket rocket3 = new VerticalRocket(3);
+            VerticalRocket rocket4 = new VerticalRocket(4);
+
+            Console.Write(rocket1.ToString());
+            Console.ReadLine();
+            Console.Write(rocket2.ToString());
+            Console.ReadLine();
+            Console.Write(rocket3.ToString());
+            Console.ReadLine();
+            Console.Write(rocket4.ToString());
+            Console.ReadLine();
         }
     }
 
@@ -30,102 +42,110 @@ namespace RetroRocketASCII
             }
             set
             {
-                if (value < 100 && value > 0)
+                if (value <= 100 && value > 0)
                 {
                     _FuselageSections = value;
                 }
             }
         }
 
-        public string rocketString
-        {
-            get;
-            set;
-        }
+        public List<string> rocketPartsList = new List<string>();
 
         private string Divider = "+=*=*=*=*=*=*+";
-        private string[] upDesigns = 
+
+        private List<string> upDesigns = new List<string>
         {
-            @"|../\..../\..|"
+              @"|../\..../\..|"
             , @"|./\/\../\/\.|"
             , @"|/\/\/\/\/\/\|"
         };
-        private string[] downDesigns = 
+
+        private List<string> downDesigns = new List<string>
         {
-            @"|\/\/\/\/\/\/|"
+              @"|\/\/\/\/\/\/|"
             , @"|.\/\/..\/\/.|"
             , @"|..\/....\/..|"
         };
-
-        private string[] NoseOrBooster = 
+        private List<string> NoseParts = new List<string>
         {
-            @"     /**\"
+              @"      /\"
+            , @"     /**\"
             , @"    //**\\"
             , @"   ///**\\\"
             , @"  ////**\\\\"
             , @" /////**\\\\\"
         };
 
-        void Rocket()
+        private List<string> BoosterParts = new List<string>
         {
-             
+              @"    //**\\"
+            , @"   ///**\\\"
+            , @"  ////**\\\\"
+            , @" /////**\\\\\"
+        };
+        /// <summary>
+        /// Creates a Generic Rocket with 2 Fuselage Sections.
+        /// </summary>
+        public VerticalRocket()
+        {
+            rocket(FuselageSections);
         }
-        
-
-        //Create the Nose and Engine Method
-        
-        public string fuselage(bool diamondShape)
+        /// <summary>
+        /// creates a rocket with specified number of Fuselage sections
+        /// </summary>
+        /// <param name="sections">Number of Fuselage Sections Desired</param>
+        public VerticalRocket(int sections)
         {
-            //Divider should be called during construction of Rocket
-            string fuselage = null;
+            FuselageSections = sections;
+            rocket(FuselageSections);
+        }
+
+        public List<string> BuildFuselage(bool diamondShape)
+        {
+            List<string> fuselage = new List<string>();
+
             if (diamondShape)
             {
-                foreach (string line in upDesigns)
-                {
-                    fuselage += line + Environment.NewLine;
-                }
-                foreach (string line in downDesigns)
-                {
-                    fuselage += line + Environment.NewLine;
-                }
+                fuselage.AddRange(upDesigns);
+                fuselage.AddRange(downDesigns);
             }
             else
             {
-                foreach (string line in downDesigns)
-                {
-                    fuselage += line + Environment.NewLine;
-                }
-                foreach (string line in upDesigns)
-                {
-                    fuselage += line + Environment.NewLine;
-                }
+                fuselage.AddRange(downDesigns);
+                fuselage.AddRange(upDesigns);
             }
             return fuselage;
         }
-        public string noseBooster()
+
+        public List<string> BuildNose()
         {
-            string noseBooster = null;
-            foreach (string line in NoseOrBooster)
+            return new List<string>(NoseParts);
+        }
+
+        public List<string> BuildBooster()
+        {
+            return new List<string>(BoosterParts);
+        }
+
+        public void rocket(int sections)
+        {
+            bool wantDiamond = sections % 2 == 0; //this will keep the X at the bottom
+
+            rocketPartsList.AddRange(BuildNose());
+            rocketPartsList.Add(Divider);
+            for (int i = 0; i < sections; i++)
             {
-                noseBooster += line + Environment.NewLine;
+                rocketPartsList.AddRange(BuildFuselage(wantDiamond));
+                wantDiamond = !wantDiamond;
+                rocketPartsList.Add(Divider);
             }
-            return noseBooster;
+            rocketPartsList.AddRange(BuildBooster());
         }
 
-
-        /* thoughts for munching
-         * should I make all of these return string arrays?
-         * or maybe string lists that can then be stacked?
-         * would I be able to output them from the object in a to string Method? 
-         * YES, YES and YES!
-         */
-
-        public string rocket(int sections)
+        public override string ToString()
         {
-            bool wantDiamond = sections % 2 == 0 ? false : true;
-            return "not finished";  
+            return String.Join(Environment.NewLine, rocketPartsList);
         }
-        
 
     }
 }

@@ -1,1 +1,6 @@
 c:\work\visual studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\bin\Debug\RetroRocketASCII.exe.config
+C:\Work\Visual Studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\bin\Debug\RetroRocketASCII.exe
+C:\Work\Visual Studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\bin\Debug\RetroRocketASCII.pdb
+C:\Work\Visual Studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\obj\Debug\RetroRocketASCII.csprojResolveAssemblyReference.cache
+C:\Work\Visual Studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\obj\Debug\RetroRocketASCII.exe
+C:\Work\Visual Studio 2013\Projects\RetroRocketASCII\RetroRocketASCII\obj\Debug\RetroRocketASCII.pdb
